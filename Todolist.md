@@ -86,3 +86,5 @@
 + Çoklu bağlantı yönetimi
 + Renkli çıktı
 + Shell script desteği
+
+cache kütüphanesi yap 
