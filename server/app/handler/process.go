@@ -43,7 +43,7 @@ func process(input string) string {
 		if len(parts) != 2 {
 			return "❌ DEL <key>"
 		}
-		del(parts[1])
+		Del(parts[1])
 	return "🗑️ Deleted"
 	default:
 		return "❓ Bilinmeyen komut"

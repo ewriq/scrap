@@ -1,7 +1,14 @@
 package app
 
-import "fmt"
+import (	
+	"scrap-server/cache"
+	code "scrap-server/error"
+)
 
-func del(key string) {
-	fmt.Println(key);
+func Del(key string) string {
+	if key != ""  {
+		cache.Delete(key)
+		return string(code.OK)
+	}
+	return string(code.NotFound)
 }
