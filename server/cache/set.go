@@ -1,8 +1,7 @@
 package cache
-
-
-func Delete(key string) {
+func Set(key, value string) {
 	globalCache.Mu.Lock()
 	defer globalCache.Mu.Unlock()
-	delete(globalCache.Data, key)
+	globalCache.Data[key] = value
 }
+

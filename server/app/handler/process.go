@@ -1,6 +1,7 @@
 package app
 
 import (
+	code "scrap-server/error"
 	"strings"
 )
 
@@ -13,29 +14,37 @@ func process(input string) string {
 	cmd := strings.ToUpper(parts[0])
 	switch cmd {
 	case "SET":
-		if len(parts) != 3 {
-			return "❌ SET <key> <value>"
-		}
-		set(parts[1], parts[2])
-		return "✅ OK"
 
+	if len(parts) != 3 {
+		return "❌ SET <key> <value>"
+	}
+
+
+	err := Set(parts[1], parts[2])
+	if err != string(code.OK) {
+
+		return string(code.NotFound)
+	}
+
+	return string(code.OK)
 	case "GET":
 		if len(parts) != 2 {
 			return "❌ GET <key>"
 		}
-		get(parts[1])
-		return "⛔ Not Found"
+
+
+		err := Get(parts[1])
+		if err != string(code.NotFound) {
+			return err
+		}
+		return string(code.NotFound)
 
 	case "DEL":
 		if len(parts) != 2 {
 			return "❌ DEL <key>"
 		}
 		del(parts[1])
-		return "🗑️ Deleted"
-
-	case "EXIT":
-		return "EXIT"
-
+	return "🗑️ Deleted"
 	default:
 		return "❓ Bilinmeyen komut"
 	}

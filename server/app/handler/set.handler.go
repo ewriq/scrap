@@ -1,7 +1,14 @@
 package app
 
-import "fmt"
+import (
+	"scrap-server/cache"
+	code "scrap-server/error"
+)
 
-func set(key, value string) {
-	fmt.Println(key, value);
+func Set(key, value string) string  {
+	if key != "" && value != "" {
+		cache.Set(key,value)
+		return string(code.OK)
+	}
+	return string(code.NotFound)
 }
