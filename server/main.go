@@ -1,10 +1,8 @@
 package main
 
 import (
-	"fmt"
 	"scrap-server/app"
 	Handler "scrap-server/app/handler"
-	"scrap-server/cache"
 )
 
 func main() {

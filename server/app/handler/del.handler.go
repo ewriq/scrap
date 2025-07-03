@@ -5,10 +5,10 @@ import (
 	code "scrap-server/error"
 )
 
-func Del(key string) string {
+func Del(key string) int {
 	if key != ""  {
 		cache.Delete(key)
-		return string(code.OK)
+		return code.OK
 	}
-	return string(code.NotFound)
+	return code.NotFound
 }

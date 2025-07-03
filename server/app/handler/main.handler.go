@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net"
 	"strings"
+	code "scrap-server/error"
 )
 
 func Connection(conn net.Conn) {
@@ -23,8 +24,13 @@ func Connection(conn net.Conn) {
 			return
 		}
 
-		response := process(input)
-
-		conn.Write([]byte(fmt.Sprintf("%s\n", response)))
+		response, data := process(input)
+		if data != "" {
+			if response != code.OK {
+				conn.Write([]byte(fmt.Sprintf("%s\n", string(response))))
+			} else {
+				conn.Write([]byte(fmt.Sprintf("%s\n", data)))
+			}
+		}
 	}
 }
